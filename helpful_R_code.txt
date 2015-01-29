@@ -1,0 +1,14 @@
+#Create a data frame
+df = data.frame(num_weeks_participated, University)
+
+#create a data frame with only values you need from a certain column
+nau = subset(df, University ==' NAU')
+
+#calculate the mean of the subset data frame that was created
+mean(ncs$num_weeks_participated)
+
+#knockout rows with certain values 
+anna = subset(an, Age!="na") 
+
+#calculate the pearson correlation coefficient
+rcorr(as.matrix(an), type = "pearson")
