@@ -4,7 +4,7 @@ import mmh3
 import screed
 
 
-sequencefile = "ERR_first_seq.fastq"                  
+sequence_file = "ERR6095742_pass.fastq"                  
 
     
   
@@ -16,17 +16,17 @@ def kmer_count_better(k, sequence):
 #    '''
 
     rv = {}
-    for record in screed.open(sequence):
-        sequence = record.sequence
-    for i in range(0, len(sequence)-k+1):
-        subseq = sequence[i:i+k]
-        v = rv.get(subseq, 0)
-        rv[subseq] = v + 1
+    for read in screed.open(sequence):
+        sequence = read.sequence
+        for i in range(0, len(sequence)-k+1):
+            subseq = sequence[i:i+k]
+            v = rv.get(subseq, 0)
+            rv[subseq] = v + 1
            
     return list(rv.items()), len(sequence)
 
 print(kmer_count_better(2, sequence_file))
-seq_file.close()
+
 
 
              
