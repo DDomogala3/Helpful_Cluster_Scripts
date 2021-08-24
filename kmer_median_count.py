@@ -2,12 +2,19 @@
 import os
 import mmh3
 import screed
+import itertools
+import argparse
 
 
-sequence_file = "ERR6095742_pass.fastq"                  
+parser = argparse.ArgumentParser()
+#parser.add_argument("input",help = "the input fastq file")
+#args = parser.parse_args()
+parser.add_argument("k",help = "the kmer input size",type=int)
+args = parser.parse_args()
+#sequence_file = args.input
+k = args.k
 
-    
-  
+sequence_file = "ERR6095742_pass.fastq"
 
 def kmer_count_better(k, sequence):
     '''
@@ -22,13 +29,9 @@ def kmer_count_better(k, sequence):
             subseq = sequence[i:i+k]
             v = rv.get(subseq, 0)
             rv[subseq] = v + 1
-           
+
     return list(rv.items()), len(sequence)
-
-print(kmer_count_better(2, sequence_file))
-
-
-
+print(kmer_count_better(k, sequence_file))
              
 #def hash_construct(kmer):
 #    # calculate the reverse complement
