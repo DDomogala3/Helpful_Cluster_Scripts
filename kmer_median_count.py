@@ -7,14 +7,15 @@ import argparse
 
 
 parser = argparse.ArgumentParser()
-#parser.add_argument("input",help = "the input fastq file")
+parser.add_argument("input",help = "the input fastq file")
 #args = parser.parse_args()
 parser.add_argument("k",help = "the kmer input size",type=int)
 args = parser.parse_args()
-#sequence_file = args.input
+sequence_file = args.input
 k = args.k
 
-sequence_file = "ERR6095742_pass.fastq"
+#sequence_file = "ERR6095742_pass.fastq"
+
 
 def kmer_count_better(k, sequence):
     '''
