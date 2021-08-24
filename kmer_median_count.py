@@ -1,7 +1,6 @@
 
 #!/usr/bin/env python3
 import os
-import mmh3
 import screed
 import itertools
 import argparse
