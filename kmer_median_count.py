@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import os
-import mmh3
 import screed
 import itertools
 import argparse
@@ -34,26 +33,3 @@ def kmer_count_better(k, sequence):
     return list(rv.items()), len(sequence)
 print(kmer_count_better(k, sequence_file))
              
-#def hash_construct(kmer):
-#    # calculate the reverse complement
-#    rc_kmer = screed.rc(kmer)
-#    
-#    # determine whether original k-mer or reverse complement is lesser
-#    if kmer < rc_kmer:
-#        canonical_kmer = kmer
-#    else:
-#        canonical_kmer = rc_kmer
-        
-#    # calculate murmurhash using a hash seed of 42
-#    hash = mmh3.hash64(canonical_kmer, 42)[0]
-#    if hash < 0: hash += 2**64
-        
-#    # done
-#    return hash
-              
-#def hash_kmers(kmers):
-#    hashes = []
-#    for kmer in kmers:
-#        hashes.append(hash_construct(kmer))
-#    return hashes   
-#hash_kmers()
