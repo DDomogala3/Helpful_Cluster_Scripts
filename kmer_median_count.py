@@ -74,8 +74,8 @@ def build_kmers(seq, ksize):
 
 km3 = build_kmers(seq, k)
 trimer = Counter(km3)
-total = statistics.median(trimer.values())
-print(total)
+total = sum(trimer.values(),1)
+median = statistics.median(trimer.values())
 for key in trimer:
-    trimer[key] /= total
+    trimer[key] /= median
     print(trimer)
