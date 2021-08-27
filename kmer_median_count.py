@@ -5,6 +5,8 @@ import itertools
 import argparse
 import statistics
 from collections import Counter
+import csv
+
 parser = argparse.ArgumentParser()
 parser.add_argument("input",help = "the input fastq file")
 #args = parser.parse_args()
@@ -51,31 +53,37 @@ def kmer_count_better(sequence,ksize):
         kmer = sequence[i:i + ksize]
         kmers.append(kmer)
     return kmers
-    print(kmers)
 
 
-km3 = kmer_count_better(seq, k)
-trimer = Counter(km3)
+first_read_kmer = kmer_count_better(seq, k)
+trimer = Counter(first_read_kmer)
+#print(trimer)
 
 
 
 
 def build_kmers(seq, ksize):
     kmers = []
-    n_kmers = len(seq) - ksize + 1
     db = screed.read_fastq_sequences(input)
     for name in db:
         full_seq = db[name].sequence
+        n_kmers = len(full_seq) - ksize + 1
         for i in range(n_kmers):
-            kmer = seq[i:i + ksize]
+            kmer = full_seq[i:i + ksize]
             kmers.append(kmer)
 
     return kmers
 
 km3 = build_kmers(seq, k)
-trimer = Counter(km3)
-total = sum(trimer.values(),1)
-median = statistics.median(trimer.values())
-for key in trimer:
-    trimer[key] /= median
-    print(trimer)
+kmer_seq = Counter(km3)
+#print(trimer)
+#print(trimer)
+total = sum(kmer_seq.values(),1)
+median = statistics.median(kmer_seq.values())
+quantiles = statistics.quantiles(kmer_seq.values())
+#print(median)
+for key in kmer_seq:
+    normal_result = []
+    kmer_seq[key] /= median
+    normal_result.append(kmer_seq)
+    print(normal_result)
